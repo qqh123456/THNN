@@ -1,9 +1,10 @@
+# coding=utf-8
 from __future__ import with_statement
 
 import logging
 logger = logging.getLogger('gensim.utils')
 
-from html.entities import name2codepoint as n2cp
+
 try:
     import cPickle as _pickle
 except ImportError:
@@ -159,7 +160,7 @@ def any2utf8(text, errors='strict', encoding='utf8'):
 to_utf8 = any2utf8
 
 
-def any2unicode(text, encoding='utf8', errors='strict'):
+def any2unicode(text, encoding='utf-8', errors='ignore'):
     """Convert a string (bytestring in `encoding` or unicode), to unicode."""
     if isinstance(text, unicode):
         return text
@@ -455,11 +456,6 @@ def decode_htmlentities(text):
                 # number is in hex
                 return chr(int('0x' + ent, 16))
         else:
-            # they were using a name
-            cp = n2cp.get(ent)
-            if cp:
-                return chr(cp)
-            else:
                 return match.group()
 
     try:
